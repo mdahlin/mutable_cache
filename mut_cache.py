@@ -35,7 +35,7 @@ def mut_cache(user_function):
     cache_len = cache.__len__
 
     @wraps(user_function)
-    def wrapper_dict_cache(*args, **kwargs):
+    def wrapper_mut_cache(*args, **kwargs):
         nonlocal hits, misses
         key = makeHash(user_function.__name__, args, kwargs)
         result = cache_get(key)
@@ -52,5 +52,5 @@ def mut_cache(user_function):
     def cache_info():
         return _CacheInfo(hits, misses, cache_len())
 
-    wrapper_dict_cache.cache_info = cache_info
-    return wrapper_dict_cache
+    wrapper_mut_cache.cache_info = cache_info
+    return wrapper_mut_cache
